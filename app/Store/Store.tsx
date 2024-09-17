@@ -23,7 +23,7 @@ export const FormProvider: React.FC<FormProviderProps> = ({ children }) => {
         step: 1,
         questionStep: 0,
         selectedOptions: [], 
-        portfolioChoice : '',
+        portfolioChoice : 'Growth & Income',
         agreement : false
     });
 

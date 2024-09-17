@@ -3,15 +3,16 @@ import { View, Text, Dimensions, StyleSheet, ScrollView, TouchableOpacity } from
 import { AntDesign, Ionicons } from '@expo/vector-icons';
 import { LineChart } from 'react-native-chart-kit';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { useNavigation } from '@react-navigation/native';
+import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { paths } from '../../interfaces/Urls';
 import FactItem from '../Components/FaceItem';
 import AllocationItem from '../Components/AllocationItem';
+import { RootStackParamList } from '../../interfaces/interfaces';
 
 
 const UserResult = () => {
   const screenWidth = Dimensions.get('window').width;
-  const navigation = useNavigation<any>();
+  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
   const chartData = {
     labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
     datasets: [
@@ -27,11 +28,11 @@ const UserResult = () => {
       <ScrollView style={styles.container}>
         <View style={styles.header}>
           <TouchableOpacity>
-            <Ionicons name="arrow-back" size={24} color="black" />
+            <Ionicons name="arrow-back" size={24} color="black" onPress={()=>navigation.goBack()} />
           </TouchableOpacity>
           <Text style={styles.headerTitle}>Your Suggested Portfolio</Text>
           <TouchableOpacity>
-            <Ionicons name="close" size={24} color="black" />
+            <Ionicons name="close" size={24} color="black" onPress={()=>navigation.goBack()}  />
           </TouchableOpacity>
         </View>
 
