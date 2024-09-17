@@ -63,7 +63,6 @@ const NewGoal = () => {
                 useNativeDriver: false,
             }).start();
         } else {
-            // Navigate back to the previous screen if on the first step
             navigation.goBack();
         }
     };
@@ -92,15 +91,21 @@ const NewGoal = () => {
             >
                 <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
                     <View style={styles.headerContainer}>
-                        <TouchableOpacity>
+                        <TouchableOpacity onPress={handleBack}>
                             <Ionicons name="arrow-back" size={30} color="black" />
                         </TouchableOpacity>
                         <TouchableOpacity>
                             <Ionicons onPress={() => navigation.navigate(paths.investment)} name="close" size={30} color="black" />
                         </TouchableOpacity>
                     </View>
-
-                    <View style={styles.progressContainer}>
+                    <View style={styles.content}>
+                        {step === 1 && <CreateGoal styles={styles} />}
+                        {step === 2 && <UrIntialAmount styles={styles} />}
+                        {step === 3 && formData.isMonthlyDeposit && <TopUp styles={styles} />}
+                    </View>
+                </ScrollView>
+                
+                <View style={styles.progressContainer}>
                         <Animated.View
                             style={[
                                 styles.progressBar,
@@ -113,14 +118,6 @@ const NewGoal = () => {
                             ]}
                         />
                     </View>
-
-                    {/* Content */}
-                    <View style={styles.content}>
-                        {step === 1 && <CreateGoal styles={styles} />}
-                        {step === 2 && <UrIntialAmount styles={styles} />}
-                        {step === 3 && formData.isMonthlyDeposit && <TopUp styles={styles} />}
-                    </View>
-                </ScrollView>
 
                 {/* Footer */}
                 <View style={styles.footer}>
@@ -154,20 +151,20 @@ const styles = StyleSheet.create({
         marginVertical: 20,
     },
     progressContainer: {
-        height: 8,
+        height: 2,
         backgroundColor: '#EDEDED',
         borderRadius: 5,
         width: '100%',
         marginVertical: 20,
     },
     progressBar: {
-        height: 8,
+        height: 2,
         backgroundColor: '#625EEE',
         borderRadius: 5,
     },
     content: {
         flex: 1,
-        alignItems: 'flex-start',
+        width: '100%',
     },
     title: {
         fontSize: 33,
@@ -183,7 +180,7 @@ const styles = StyleSheet.create({
         maxWidth: '90%',
     },
     imageContainer: {
-        width: 200,
+        width: '100%',
         height: 160,
         borderRadius: 15,
         justifyContent: 'center',

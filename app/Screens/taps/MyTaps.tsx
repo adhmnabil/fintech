@@ -1,32 +1,33 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
-import { View, Text } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';  
 import ExploreScreen from './HomeScreen';
 import { paths } from '../../../interfaces/Urls';
 
 const Tab = createBottomTabNavigator();
+
 const AcademyScreen = () => (
-    <View>
+    <View style={styles.screenContainer}>
         <Text>Academy Screen</Text>
     </View>
 );
 
 const SavingsScreen = () => (
-    <View>
+    <View style={styles.screenContainer}>
         <Text>Savings Screen</Text>
     </View>
 );
 
 const ServicesScreen = () => (
-    <View>
+    <View style={styles.screenContainer}>
         <Text>Services Screen</Text>
     </View>
 );
 
 const SettingsScreen = () => (
-    <View>
+    <View style={styles.screenContainer}>
         <Text>Settings Screen</Text>
     </View>
 );
@@ -50,7 +51,6 @@ const MyTaps = () => {
                         iconName = focused ? 'settings' : 'settings-outline';
                     }
 
-                   
                     return <Ionicons name={iconName} size={size} color={color} />;
                 },
                 tabBarActiveTintColor: '#625EEE', 
@@ -66,5 +66,13 @@ const MyTaps = () => {
         </Tab.Navigator>
     );
 };
+
+const styles = StyleSheet.create({
+    screenContainer: {
+        flex: 1, 
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+});
 
 export default MyTaps;

@@ -18,8 +18,8 @@ const ExploreScreen : React.FC  = () => {
     const {updateFormData} = useFormContext()
     const balanceData = [
         { id: '1', amount: '10,984', currency: 'AED' },
-        { id: '2', amount: '5,242', currency: 'USD' },
-        { id: '3', amount: '20,180', currency: 'EUR' },
+        { id: '2', amount: '5,242', currency: 'AED' },
+        { id: '3', amount: '20,180', currency: 'AED' },
       ];
 
       const resetFormData = () => {
@@ -76,8 +76,6 @@ const ExploreScreen : React.FC  = () => {
           </View>
         )}
       />
-
-      {/* Pagination Dots */}
       <View style={styles.paginationDots}>
         {balanceData.map((_, i) => (
           <View
@@ -107,7 +105,7 @@ const ExploreScreen : React.FC  = () => {
                         </TouchableOpacity>
                     </View>
 
-                    {/* Academy Section */}
+          
                     <FlatList
                         data={academyItems}
                         renderItem={({ item }) => <AcademyCard nav={handleAcademyCardPress} item={item} />}
@@ -117,7 +115,7 @@ const ExploreScreen : React.FC  = () => {
                         contentContainerStyle={{ paddingHorizontal: 10 }}
                     />
 
-                    {/* Service Hub */}
+               
                     <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center', marginVertical: 10 }}>
                         <Text style={styles.sectionTitle}>Service Hub</Text>
                         <AntDesign name="right" size={18} color="rgba(0, 0, 0, 0.5)" />
@@ -212,7 +210,8 @@ const styles = StyleSheet.create({
     },
     actionsContainer: {
         flexDirection: 'row',
-        justifyContent: 'space-evenly',
+        justifyContent : 'center',
+        gap : 20,
         paddingHorizontal: 20,
         paddingVertical: 20,
     },
@@ -247,7 +246,7 @@ const styles = StyleSheet.create({
     sectionTitle: {
         fontSize: 18,
         fontWeight: 'bold',
-        marginHorizontal: 10,
+        marginHorizontal: 20,
         color: 'rgba(0, 0, 0, 0.5)',
     },
     serviceCard: {

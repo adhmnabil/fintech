@@ -1,7 +1,6 @@
+import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import React from 'react';
-import { View, Text } from 'react-native';
 import MyTaps from './Screens/taps/MyTaps';
 import Investment from './Screens/Investment';
 import NewGoal from './Screens/NewGoal';

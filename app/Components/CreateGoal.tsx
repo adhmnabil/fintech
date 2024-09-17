@@ -1,16 +1,36 @@
-import React, { useEffect } from 'react';
-import { Image, Text, TouchableOpacity, TextInput, View } from 'react-native';
+import React, { useState } from 'react';
+import { Image, Text, TouchableOpacity, TextInput, View, Alert } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
+import * as ImagePicker from 'expo-image-picker';
 import { useFormContext } from '../Store/Store';
-import {CreateGoalProps} from '../../interfaces/interfaces'
+import { CreateGoalProps } from '../../interfaces/interfaces';
 import { useAnalytics } from '@segment/analytics-react-native';
 
 const CreateGoal: React.FC<CreateGoalProps> = ({ styles }) => {
   const { formData, updateFormData } = useFormContext();
   const goalName = formData.goalName || '';
   const { track } = useAnalytics();
-  
+  const [imageUri, setImageUri] = useState(require('../images/bank.png')); 
+
+  const pickImage = async () => {
+    const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+    if (status !== 'granted') {
+      Alert.alert('Permission Denied', 'Sorry, we need media library permissions to make this work!');
+      return;
+    }
+
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      quality: 1,
+    });
+
+    if (!result.canceled) {
+      setImageUri({ uri: result.assets[0].uri }); 
+    }
+  };
+
   return (
     <View>
       <Text style={styles.title}>Create a Goal</Text>
@@ -26,9 +46,15 @@ const CreateGoal: React.FC<CreateGoalProps> = ({ styles }) => {
           onPress={() => {}}
           style={{ padding: 20, backgroundColor: 'rgba(255, 244, 216, 1)', borderRadius: 50 }}
         >
-          <Image source={require('../images/bank.png')} style={{ width: 50, height: 50 }} />
+          <Image source={imageUri} style={{ width: 100, height: 100 }} />
         </TouchableOpacity>
-        <Ionicons name="pencil" size={18} color="#625EEE" style={styles.editIcon} />
+        <Ionicons 
+          name="pencil" 
+          size={18} 
+          color="#625EEE" 
+          style={styles.editIcon} 
+          onPress={pickImage}  
+        />
       </LinearGradient>
 
       <View>
@@ -36,11 +62,11 @@ const CreateGoal: React.FC<CreateGoalProps> = ({ styles }) => {
           style={styles.input}
           placeholder="Goal Name"
           value={goalName}
-          onChangeText={(text) =>{
-            updateFormData('goalName', text)
-            track('goal updated' , {
-              goalchoosenNotConfirmed : formData.goalName
-            })
+          onChangeText={(text) => {
+            updateFormData('goalName', text);
+            track('goal updated', {
+              goalchoosenNotConfirmed: formData.goalName,
+            });
           }}
         />
       </View>
