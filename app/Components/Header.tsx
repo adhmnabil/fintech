@@ -19,11 +19,18 @@ export default Header
 const styles = StyleSheet.create({
     header: {
         backgroundColor: '#625EEE',
-        padding: 20,
+        padding: 15,
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
         paddingHorizontal: 20,
+           // Shadow for iOS
+           shadowColor: '#000',        
+           shadowOffset: { width: 0, height: 5 },  
+           shadowOpacity: 2,         
+           shadowRadius: 3,            
+           // Shadow for Android
+           elevation: 60,    
     },
     profileImage: {
         width: 40,

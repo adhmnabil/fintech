@@ -1,11 +1,8 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
-import { useNavigation, NavigationProp } from '@react-navigation/native';
-import {RootStackParamList} from '../../interfaces/interfaces'
 import {AcademyCardProps} from '../../interfaces/interfaces'
 
 const AcademyCard : React.FC<AcademyCardProps> = ({ item  , nav}) => {
-    const navigation = useNavigation<NavigationProp<RootStackParamList>>();
     return (
         <TouchableOpacity onPress={() => nav()} style={styles.card}>
             <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
@@ -21,17 +18,23 @@ const styles = StyleSheet.create({
     card: {
         backgroundColor: '#F2F1FF',
         height: 121,
-        width: 262,
+        width: 270,
         margin: 12,
-        borderRadius: 10,
-        padding: 15,
+        borderRadius: 16,
+        paddingRight: 12,
+        paddingLeft : 12,
+        paddingTop : 15,
+        paddingBottom : 15,
         justifyContent: 'space-between',
+        borderWidth: 1,
+        borderColor: 'rgba(100, 94, 255, 0.15)',
     },
     cardText: {
         color: '#000',
         fontSize: 18,
         fontWeight: 'bold',
         maxWidth: '70%',
+        fontFamily: 'PublicSans-Regular', 
     },
     image: {
         width: 50,
@@ -40,7 +43,7 @@ const styles = StyleSheet.create({
     actionText: {
         color: '#625EEE',
         fontWeight: 'bold',
-        fontSize: 14,
+        fontSize: 12,
     },
 });
 

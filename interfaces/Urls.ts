@@ -1,4 +1,4 @@
-export const paths: Record<string, string> = {
+export const paths = {
     myTaps: 'myTaps',
     investment: 'investment',
     newGoal: 'newGoal',

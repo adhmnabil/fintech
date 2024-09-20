@@ -118,8 +118,6 @@ const NewGoal = () => {
                             ]}
                         />
                     </View>
-
-                {/* Footer */}
                 <View style={styles.footer}>
                     <TouchableOpacity onPress={handleBack}>
                         <Text style={styles.backText}>Back</Text>

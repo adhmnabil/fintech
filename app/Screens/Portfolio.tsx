@@ -21,6 +21,7 @@ const Portfolio: React.FC = () => {
   const [order, setorder] = useState(false)
   const navigation = useNavigation<NavigationProp<any>>();
   const { track } = useAnalytics();
+  
   useEffect(() => {
     track('Investment Goal Created', {
       goalName: formData.goalName,

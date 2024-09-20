@@ -55,7 +55,14 @@ const MyTaps = () => {
                 },
                 tabBarActiveTintColor: '#625EEE', 
                 tabBarInactiveTintColor: 'gray',  
-                headerShown: false
+                headerShown: false,
+                tabBarStyle:{
+                    backgroundColor: '#FFFFFF',  
+                    borderTopWidth: 0, 
+                    height: 70, 
+                    paddingBottom: 10,  
+                    paddingTop: 10, 
+                },
             })}
         >
             <Tab.Screen name={paths.Explore} component={ExploreScreen} />

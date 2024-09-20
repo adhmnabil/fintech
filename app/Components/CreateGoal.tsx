@@ -46,7 +46,7 @@ const CreateGoal: React.FC<CreateGoalProps> = ({ styles }) => {
           onPress={() => {}}
           style={{ padding: 20, backgroundColor: 'rgba(255, 244, 216, 1)', borderRadius: 50 }}
         >
-          <Image source={imageUri} style={{ width: 100, height: 100 }} />
+          <Image source={imageUri} style={{ width: 50, height: 50 }} />
         </TouchableOpacity>
         <Ionicons 
           name="pencil" 

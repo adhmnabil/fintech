@@ -24,7 +24,7 @@ export interface RootStackParamList extends Record<keyof typeof paths, string> {
 export interface ServiceCardProps {
     item: {
         id: string;
-        icon?: string;
+        icon?: any;
         image?: any;
         title: string;
         description?: string;

@@ -3,7 +3,7 @@ import {Service , AcademyItem , Question} from './interfaces'
 export const services  : Service[] = [
     {
         id: '1',
-        icon: 'add',
+        icon:  require('../app/images/plus.png'),
         title: 'Cash in advance',
         description: 'You can now avail up to 50% of your total balance.',
         buttonText: 'Request Cash',
@@ -16,7 +16,7 @@ export const services  : Service[] = [
     },
     {
         id: '3',
-        image: require('../app/images/Rectangle.png'),
+        image: require('../app/images/car.png'),
         title: 'Health Insurance',
         border: true,
     },
@@ -31,7 +31,7 @@ export const academyItems  : AcademyItem[] = [
     },
     {
         id: '2',
-        image: require('../app/images/icons/invetion.png'),
+        image: require('../app/images/icons/savings2.png'),
         title: 'Invest and put your money to work',
         actionText: 'START INVESTMENT',
     },
@@ -52,7 +52,7 @@ export const academy : AcademyItem[] = [
     },
     {
         id: '3',
-        image: require('../app/images/acadmy3.png'),
+        image: require('../app/images/acadmy2.png'),
         title: 'Earn daily on your savings!',
         actionText: 'START SAVING',
     }

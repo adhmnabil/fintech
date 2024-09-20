@@ -9,7 +9,8 @@ import AcademyCard from '../../Components/AcademyCard';
 import FinancialAcademy from '../../Components/FinancialAcademy';
 import {services , academyItems , academy} from '../../../interfaces/StaticData'
 import { useFormContext } from '../../Store/Store';
-
+import { useFonts } from 'expo-font';  
+import AppLoading from 'expo-app-loading';
 
 const ExploreScreen : React.FC  = () => {
     const navigation : any = useNavigation();
@@ -54,28 +55,40 @@ const ExploreScreen : React.FC  = () => {
   
     const viewConfigRef = useRef({ viewAreaCoveragePercentThreshold: 50 });
 
+    const [fontsLoaded] = useFonts({
+        'PublicSans-Regular': require('../../../assets/fonts/Public_Sans/static/PublicSans-Regular.ttf'),
+      });
+    
+      if (!fontsLoaded) {
+        return <AppLoading />;
+      }
+
     return (
         <SafeAreaView style={styles.container}>
             <Header />
             <ScrollView>
                 <Text style={styles.planText}>Gratuity Plan</Text>
                 <FlatList
-        data={balanceData}
-        ref={flatListRef}
-        keyExtractor={(item) => item.id}
-        horizontal
-        pagingEnabled
-        showsHorizontalScrollIndicator={false}
-        onViewableItemsChanged={onViewRef.current}
-        viewabilityConfig={viewConfigRef.current}
-        renderItem={({ item }) => (
-          <View style={styles.balanceContainer}>
-            <Text style={styles.balanceText}>
-              {item.amount} <Text style={styles.currencyText}>{item.currency}</Text>
-            </Text>
-          </View>
-        )}
-      />
+                     data={balanceData}
+                     ref={flatListRef}
+                     keyExtractor={(item) => item.id}
+                     horizontal
+                     pagingEnabled
+                     showsHorizontalScrollIndicator={false}
+                     onViewableItemsChanged={onViewRef.current}
+                     viewabilityConfig={viewConfigRef.current}
+                     renderItem={({ item }) => (
+                       <View style={styles.balanceContainer}>
+                         <Text style={styles.balanceText}>
+                           {item.amount} 
+                           <Text style={styles.currencyText}>{item.currency}</Text>
+                         </Text>
+                         <Text style={[
+                            styles.viewMore
+                         ]}>View More</Text>
+                       </View>
+                     )}
+                />
       <View style={styles.paginationDots}>
         {balanceData.map((_, i) => (
           <View
@@ -87,7 +100,6 @@ const ExploreScreen : React.FC  = () => {
 
 
                 <View style={styles.contentContainer}>
-                    {/* Action Buttons */}
                     <View style={styles.actionsContainer}>
                         <TouchableOpacity>
                             <Ionicons name="add" size={28} color="#625EEE" style={styles.actionIcon} />
@@ -116,7 +128,7 @@ const ExploreScreen : React.FC  = () => {
                     />
 
                
-                    <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center', marginVertical: 10 }}>
+                    <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center', marginVertical: 10  }}>
                         <Text style={styles.sectionTitle}>Service Hub</Text>
                         <AntDesign name="right" size={18} color="rgba(0, 0, 0, 0.5)" />
                     </TouchableOpacity>
@@ -128,9 +140,9 @@ const ExploreScreen : React.FC  = () => {
                         showsHorizontalScrollIndicator={false}
                         contentContainerStyle={{ paddingHorizontal: 10 }}
                     />
-                    <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center', marginVertical: 10 }}>
+                    <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center' , marginTop : 15 }}>
                         <Text style={styles.sectionTitle}>Service Hub</Text>
-                        <AntDesign name="right" size={18} color="rgba(0, 0, 0, 0.5)" />
+                        <AntDesign name="right" size={20} color="rgba(0, 0, 0, 0.5)" />
                     </TouchableOpacity>
                     <FlatList
                         data={academy}
@@ -150,12 +162,15 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#625EEE',
+        fontFamily: 'PublicSans-Regular', 
     },
     balanceContainer: {
-        width: 300, // adjust to fit your content width
+        width: 345, 
         justifyContent: 'center',
         alignItems: 'center',
         marginHorizontal: 20,
+        margin : 'auto',
+        textAlign : 'center',
       },
     planText: {
         color: 'white',
@@ -164,10 +179,11 @@ const styles = StyleSheet.create({
         margin: 20,
     },
     balanceText: {
-        fontSize: 48,
+        fontSize: 56,
         color: 'white',
         fontWeight: 'bold',
-        margin: 20,
+        fontStyle : 'normal',
+        width : '100%'
     },
     checkboxContainer: {
         flexDirection: 'row',
@@ -191,33 +207,33 @@ const styles = StyleSheet.create({
     activeDot: {
         width: 20,
         height: 4,
-        borderRadius: 5,
+        borderRadius: 2,
         backgroundColor: 'white',
-        marginHorizontal: 5,
+        marginHorizontal: 3,
     },
     inactiveDot: {
         width: 10,
         height: 4,
         borderRadius: 5,
         backgroundColor: '#bbb',
-        marginHorizontal: 5,
+        marginHorizontal: 3
     },
     contentContainer: {
         flex: 1,
         backgroundColor: 'white',
-        borderTopLeftRadius: 20,
-        borderTopRightRadius: 20,
+        borderTopLeftRadius: 30,
+        borderTopRightRadius: 30,
+        paddingVertical: 15, 
     },
     actionsContainer: {
         flexDirection: 'row',
         justifyContent : 'center',
-        gap : 20,
+        gap : 15,
         paddingHorizontal: 20,
         paddingVertical: 20,
     },
     actionIcon: {
-        padding: 6,
-        paddingHorizontal: 12,
+        padding: 15,
         borderWidth: 1,
         borderColor: '#625EEE26',
         borderRadius: 8,
@@ -246,8 +262,9 @@ const styles = StyleSheet.create({
     sectionTitle: {
         fontSize: 18,
         fontWeight: 'bold',
-        marginHorizontal: 20,
-        color: 'rgba(0, 0, 0, 0.5)',
+        marginLeft: 30,
+        marginRight : 6,
+        color: 'rgba(0, 0, 0, 0.50)',
     },
     serviceCard: {
         padding: 12,
@@ -286,6 +303,15 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         resizeMode: 'contain',
     },
+    viewMore : {
+        fontFamily: 'Public Sans',  
+        fontSize: 12,               
+        fontStyle: 'normal',        
+        fontWeight: '400',          
+        color : 'white', 
+        width : '100%',
+        textAlign : 'right',
+    }
 });
 
 export default ExploreScreen;
