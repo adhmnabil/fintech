@@ -1,11 +1,14 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
-import {AcademyCardProps} from '../../interfaces/interfaces'
+import { View, Text, StyleSheet, Image, TouchableOpacity, Dimensions } from 'react-native';
+import { AcademyCardProps } from '../../interfaces/interfaces';
 
-const AcademyCard : React.FC<AcademyCardProps> = ({ item  , nav}) => {
+const screenWidth = Dimensions.get('window').width;
+const screenHeight = Dimensions.get('window').height;
+
+const AcademyCard: React.FC<AcademyCardProps> = ({ item, nav }) => {
     return (
         <TouchableOpacity onPress={() => nav()} style={styles.card}>
-            <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
+            <View style={styles.cardContent}>
                 <Text style={styles.cardText}>{item.title}</Text>
                 <Image source={item.image} resizeMode="contain" style={styles.image} />
             </View>
@@ -17,33 +20,38 @@ const AcademyCard : React.FC<AcademyCardProps> = ({ item  , nav}) => {
 const styles = StyleSheet.create({
     card: {
         backgroundColor: '#F2F1FF',
-        height: 121,
-        width: 270,
-        margin: 12,
+        height: screenHeight * 0.15, 
+        width: screenWidth * 0.75, 
+        margin: screenWidth * 0.03, 
         borderRadius: 16,
-        paddingRight: 12,
-        paddingLeft : 12,
-        paddingTop : 15,
-        paddingBottom : 15,
+        paddingRight: screenWidth * 0.03, 
+        paddingLeft: screenWidth * 0.03, 
+        paddingTop: screenHeight * 0.02, 
+        paddingBottom: screenHeight * 0.02, 
         justifyContent: 'space-between',
         borderWidth: 1,
         borderColor: 'rgba(100, 94, 255, 0.15)',
     },
+    cardContent: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+    },
     cardText: {
         color: '#000',
-        fontSize: 18,
+        fontSize: screenWidth * 0.035,
         fontWeight: 'bold',
         maxWidth: '70%',
-        fontFamily: 'PublicSans-Regular', 
+        fontFamily: 'PublicSans-Regular',
     },
     image: {
-        width: 50,
-        height: 50,
+        width: screenWidth * 0.13,
+        height: screenWidth * 0.13, 
     },
     actionText: {
         color: '#625EEE',
         fontWeight: 'bold',
-        fontSize: 12,
+        fontSize: screenWidth * 0.03, 
     },
 });
 

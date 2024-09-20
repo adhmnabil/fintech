@@ -1,17 +1,20 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity ,  } from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity, Dimensions } from 'react-native';
 import { ServiceCardProps } from '../../interfaces/interfaces';
 
-const ServiceCard: React.FC<ServiceCardProps> = ({ item }) => { 
+const screenWidth = Dimensions.get('window').width;
+const screenHeight = Dimensions.get('window').height;
+
+const ServiceCard: React.FC<ServiceCardProps> = ({ item }) => {
     return (
         <View style={[
-            { backgroundColor: item.backgroundColor || 'white' } ,
-            item.border ?  styles.serviceCard : styles.serviceCardMain
-            ]}>
-            {item.icon && <Image source={ item.icon } style={styles.icon} />}
-            {item.image && <Image source={item.image }  style={styles.serviceImage} />}
+            { backgroundColor: item.backgroundColor || 'white' },
+            item.border ? styles.serviceCard : styles.serviceCardMain
+        ]}>
+            {item.icon && <Image source={item.icon} style={styles.icon} />}
+            {item.image && <Image source={item.image} style={styles.serviceImage} />}
             <Text style={[
-               item.border ? styles.serviceTitle : styles.serviceTitleNotMain
+                item.border ? styles.serviceTitle : styles.serviceTitleNotMain
             ]}>{item.title}</Text>
             {item.description && <Text style={styles.serviceDescription}>{item.description}</Text>}
             {item.buttonText && (
@@ -25,80 +28,77 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ item }) => {
 
 const styles = StyleSheet.create({
     serviceCard: {
-        padding: 12,
+        padding: screenWidth * 0.03,
         borderRadius: 10,
-        margin: 10,
-        marginTop : 1,
+        margin: screenWidth * 0.02, 
+        marginTop: screenHeight * 0.01, 
         justifyContent: 'space-around',
-        alignItems : 'center',
+        alignItems: 'center',
         borderWidth: 1,
         borderColor: 'rgba(143, 143, 143, 1)',
-        width: 148,
-        height: 203,
-        backgroundColor : '#625EEE26'
+        width: screenWidth * 0.4, 
+        height: screenHeight * 0.28, 
+        backgroundColor: '#625EEE26',
     },
     serviceCardMain: {
-        padding: 12,
+        padding: screenWidth * 0.03, 
         borderRadius: 10,
-        margin: 10,
-        marginTop : 1,
+        margin: screenWidth * 0.02, 
+        marginTop: screenHeight * 0.01, 
         justifyContent: 'space-around',
         borderWidth: 2,
         borderColor: 'rgba(143, 143, 143, 1)',
-        width: 150,
-        height: 203,
+        width: screenWidth * 0.42,
+        height: screenHeight * 0.28, 
     },
     serviceTitle: {
-        fontSize: 12,
+        fontSize: screenWidth * 0.025, 
         fontWeight: 'bold',
         textAlign: 'center',
         color: '#636363',
-        padding : 5,
+        padding: screenWidth * 0.02, 
         borderRadius: 10,
         borderWidth: 1,
         borderColor: '#202020',
-        width : 104,
+        width: screenWidth * 0.28, 
     },
     serviceTitleNotMain: {
-        fontSize: 16,
+        fontSize: screenWidth * 0.025, 
         fontWeight: 'bold',
         textAlign: 'center',
         color: '#636363',
-        marginTop : 20,
-        
+        marginTop: screenHeight * 0.03, 
     },
     serviceDescription: {
-        color: '#636363', 
-        fontSize: 10,
-        fontStyle: 'normal',
+        color: '#636363',
+        fontSize: screenWidth * 0.025, 
         fontWeight: '700',
-        lineHeight: 14,
-        marginVertical: 10,
+        lineHeight: screenHeight * 0.02, 
+        marginVertical: screenHeight * 0.015, 
     },
     requestButton: {
         backgroundColor: '#625EEE',
-        paddingVertical: 10,
+        paddingVertical: screenHeight * 0.015, 
         borderRadius: 10,
         alignItems: 'center',
-        width : '80%'
+        width: '80%',
     },
     requestButtonText: {
         color: 'white',
-        fontSize: 12,
+        fontSize: screenWidth * 0.025, 
         fontWeight: 'bold',
-        
     },
     serviceImage: {
         width: '100%',
-        height: 100,
+        height: screenHeight * 0.12,
         alignSelf: 'center',
         resizeMode: 'contain',
     },
-    icon:{
-        width : 30 ,
-        height : 30,
-        marginTop : 10
-    }
+    icon: {
+        width: screenWidth * 0.08, 
+        height: screenWidth * 0.08, 
+        marginTop: screenHeight * 0.01, 
+    },
 });
 
 export default ServiceCard;
