@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { View, Text, StyleSheet, FlatList, ScrollView, TouchableOpacity, Dimensions } from 'react-native';
+import { View, Text, StyleSheet, FlatList, ScrollView, TouchableOpacity } from 'react-native';
 import { AntDesign, Feather, Ionicons } from '@expo/vector-icons';
+import { scale, verticalScale, moderateScale } from 'react-native-size-matters';
 import Header from '../../Components/Header';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
@@ -17,9 +18,6 @@ const ExploreScreen: React.FC = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const flatListRef = useRef(null);
   const { updateFormData } = useFormContext();
-
-  const screenWidth = Dimensions.get('window').width;
-  const screenHeight = Dimensions.get('window').height;
 
   const balanceData = [
     { id: '1', amount: '10,984', currency: 'AED' },
@@ -73,7 +71,7 @@ const ExploreScreen: React.FC = () => {
       <Header />
       <ScrollView>
         <Text style={styles.planText}>Gratuity Plan</Text>
-        <View style={{ marginTop: 10 }}>
+        <View style={{ marginTop: verticalScale(10) }}>
           <FlatList
             data={balanceData}
             ref={flatListRef}
@@ -84,7 +82,7 @@ const ExploreScreen: React.FC = () => {
             onViewableItemsChanged={onViewRef.current}
             viewabilityConfig={viewConfigRef.current}
             renderItem={({ item }) => (
-              <View style={[styles.balanceContainer, { width: screenWidth * 0.85 }]}>
+              <View style={[styles.balanceContainer, { width: scale(300) }]}>
                 <Text style={styles.balanceText}>
                   {item.amount}
                   <Text style={styles.currencyText}>{item.currency}</Text>
@@ -106,17 +104,17 @@ const ExploreScreen: React.FC = () => {
         <View style={styles.contentContainer}>
           <View style={styles.actionsContainer}>
             <TouchableOpacity>
-              <Ionicons name="add" size={screenWidth * 0.07} color="#625EEE" style={styles.actionIcon} />
+              <Ionicons name="add" size={moderateScale(28)} color="#625EEE" style={styles.actionIcon} />
               <Text style={styles.actionText}>New goal</Text>
             </TouchableOpacity>
 
             <TouchableOpacity>
-              <Ionicons name="arrow-forward" size={screenWidth * 0.07} color="#625EEE" style={styles.actionIcon} />
+              <Ionicons name="arrow-forward" size={moderateScale(28)} color="#625EEE" style={styles.actionIcon} />
               <Text style={styles.actionText}>Add fund</Text>
             </TouchableOpacity>
 
             <TouchableOpacity>
-              <Feather name="list" size={screenWidth * 0.07} color="#625EEE" style={styles.actionIcon} />
+              <Feather name="list" size={moderateScale(28)} color="#625EEE" style={styles.actionIcon} />
               <Text style={styles.actionText}>Statement</Text>
             </TouchableOpacity>
           </View>
@@ -127,12 +125,12 @@ const ExploreScreen: React.FC = () => {
             keyExtractor={(item) => item.id}
             horizontal
             showsHorizontalScrollIndicator={false}
-            contentContainerStyle={{ paddingHorizontal: screenWidth * 0.03 }}
+            contentContainerStyle={{ paddingHorizontal: scale(10) }}
           />
 
-          <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center', marginVertical: screenHeight * 0.015 }}>
+          <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center', marginVertical: verticalScale(10) }}>
             <Text style={styles.sectionTitle}>Service Hub</Text>
-            <AntDesign name="right" size={screenWidth * 0.05} color="rgba(0, 0, 0, 0.5)" />
+            <AntDesign name="right" size={moderateScale(18)} color="rgba(0, 0, 0, 0.5)" />
           </TouchableOpacity>
 
           <FlatList
@@ -141,12 +139,12 @@ const ExploreScreen: React.FC = () => {
             keyExtractor={(item) => item.id}
             horizontal
             showsHorizontalScrollIndicator={false}
-            contentContainerStyle={{ paddingHorizontal: screenWidth * 0.03 }}
+            contentContainerStyle={{ paddingHorizontal: scale(10) }}
           />
 
-          <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center', marginTop: screenHeight * 0.02 }}>
+          <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center', marginTop: verticalScale(15) }}>
             <Text style={styles.sectionTitle}>Service Hub</Text>
-            <AntDesign name="right" size={screenWidth * 0.06} color="rgba(0, 0, 0, 0.5)" />
+            <AntDesign name="right" size={moderateScale(20)} color="rgba(0, 0, 0, 0.5)" />
           </TouchableOpacity>
 
           <FlatList
@@ -155,7 +153,7 @@ const ExploreScreen: React.FC = () => {
             keyExtractor={(item) => item.id}
             horizontal
             showsHorizontalScrollIndicator={false}
-            contentContainerStyle={{ paddingHorizontal: screenWidth * 0.03 }}
+            contentContainerStyle={{ paddingHorizontal: scale(10) }}
           />
         </View>
       </ScrollView>
@@ -172,62 +170,62 @@ const styles = StyleSheet.create({
   balanceContainer: {
     justifyContent: 'center',
     alignItems: 'center',
-    marginHorizontal: Dimensions.get('window').width * 0.05,
+    marginHorizontal: scale(20),
     textAlign: 'center',
   },
   planText: {
     color: 'white',
-    fontSize: Dimensions.get('window').width * 0.05,
+    fontSize: scale(18),
     fontWeight: 'bold',
-    margin: Dimensions.get('window').width * 0.05,
+    margin: scale(20),
   },
   balanceText: {
-    fontSize: Dimensions.get('window').width * 0.13,
+    fontSize: scale(50),
     color: 'white',
     fontWeight: 'bold',
-    width: '100%', // Ensure full width
-    textAlign: 'left', // Align text to left
+    width: '100%', 
+    textAlign: 'left', 
   },
   currencyText: {
-    fontSize: Dimensions.get('window').width * 0.04,
+    fontSize: scale(18),
     color: 'white',
     fontWeight: '400',
   },
   paginationDots: {
     flexDirection: 'row',
-    marginVertical: Dimensions.get('window').height * 0.02,
+    marginVertical: verticalScale(10),
     alignSelf: 'center',
   },
   activeDot: {
-    width: Dimensions.get('window').width * 0.05,
-    height: Dimensions.get('window').height * 0.005,
+    width: scale(20),
+    height: verticalScale(4),
     borderRadius: 2,
     backgroundColor: 'white',
-    marginHorizontal: 3,
+    marginHorizontal: scale(3),
   },
   inactiveDot: {
-    width: Dimensions.get('window').width * 0.03,
-    height: Dimensions.get('window').height * 0.005,
+    width: scale(10),
+    height: verticalScale(4),
     borderRadius: 5,
     backgroundColor: '#bbb',
-    marginHorizontal: 3,
+    marginHorizontal: scale(3),
   },
   contentContainer: {
     flex: 1,
     backgroundColor: 'white',
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,
-    paddingVertical: Dimensions.get('window').height * 0.02,
+    paddingVertical: verticalScale(20),
   },
   actionsContainer: {
     flexDirection: 'row',
     justifyContent: 'center',
     gap: 15,
-    paddingHorizontal: Dimensions.get('window').width * 0.05,
-    paddingVertical: Dimensions.get('window').height * 0.02,
+    paddingHorizontal: scale(20),
+    paddingVertical: verticalScale(20),
   },
   actionIcon: {
-    padding: Dimensions.get('window').width * 0.04,
+    padding: moderateScale(15),
     borderWidth: 1,
     borderColor: '#625EEE26',
     borderRadius: 8,
@@ -235,17 +233,17 @@ const styles = StyleSheet.create({
   },
   actionText: {
     marginTop: 5,
-    fontSize: Dimensions.get('window').width * 0.04,
+    fontSize: scale(14),
     color: '#333',
   },
   sectionTitle: {
-    fontSize: Dimensions.get('window').width * 0.045,
+    fontSize: scale(18),
     fontWeight: 'bold',
-    marginLeft: Dimensions.get('window').width * 0.05,
+    marginLeft: scale(20),
     color: 'rgba(0, 0, 0, 0.50)',
   },
   viewMore: {
-    fontSize: Dimensions.get('window').width * 0.03,
+    fontSize: scale(12),
     color: 'white',
     textAlign: 'right',
     width: '90%',
