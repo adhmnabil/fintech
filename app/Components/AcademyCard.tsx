@@ -20,7 +20,7 @@ const AcademyCard: React.FC<AcademyCardProps> = ({ item, nav }) => {
 const styles = StyleSheet.create({
     card: {
         backgroundColor: '#F2F1FF',
-        height: screenHeight * 0.15, 
+        height: screenHeight * 0.16, 
         width: screenWidth * 0.75, 
         margin: screenWidth * 0.03, 
         borderRadius: 16,
@@ -39,9 +39,9 @@ const styles = StyleSheet.create({
     },
     cardText: {
         color: '#000',
-        fontSize: screenWidth * 0.035,
+        fontSize: screenWidth * 0.060,
         fontWeight: 'bold',
-        maxWidth: '70%',
+        maxWidth: '80%',
         fontFamily: 'PublicSans-Regular',
     },
     image: {
