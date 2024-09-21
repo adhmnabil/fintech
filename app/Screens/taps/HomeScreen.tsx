@@ -240,6 +240,7 @@ const styles = StyleSheet.create({
     fontSize: scale(18),
     fontWeight: 'bold',
     marginLeft: scale(20),
+    marginRight :scale(8) ,
     color: 'rgba(0, 0, 0, 0.50)',
   },
   viewMore: {
